@@ -1,4 +1,7 @@
-import { Component, DoCheck, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
+
+//Angular Material
+import { MatDialog } from '@angular/material/dialog';
 
 //Models
 import { PositionMap } from 'src/app/models/position-map';
@@ -11,6 +14,7 @@ import { PositionHeroService } from 'src/app/services/position-hero.service';
 import { RouterMapsService } from 'src/app/services/router-maps.service';
 import { ActivatedRoute } from '@angular/router';
 import { SoundMapService } from 'src/app/services/sound-map.service';
+import { ModalTipsComponent } from '../modal/modal-tips/modal-tips.component';
 
 
 @Component({
@@ -29,7 +33,8 @@ export class MapComponent implements OnInit, DoCheck {
     private routerMapsService: RouterMapsService,
     private positionHeroService: PositionHeroService,
     private activatedRoute: ActivatedRoute,
-    private soundMapService: SoundMapService
+    private soundMapService: SoundMapService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -59,7 +64,7 @@ export class MapComponent implements OnInit, DoCheck {
     this.soundMapService.getPlayAmbientSound();
   }
 
-  public moveHeroToMap(idTips: number) {
+  public moveHeroToTips(idTips: number) {
 
     let findMap = this.positionMap.find((mapa) => {
       return this.positionHero.mapaId === mapa.id
@@ -76,7 +81,17 @@ export class MapComponent implements OnInit, DoCheck {
 
         setTimeout(() => {
           this.soundMapService.getPlayObjectsSound("./assets/sounds/check.mp3");
-        }, 1000)
+
+          const dialogRef = this.dialog.open(ModalTipsComponent, {
+            width: '100%',
+            minHeight: '200px',
+          });
+
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+          });
+
+        }, 500)
       }
     }
 

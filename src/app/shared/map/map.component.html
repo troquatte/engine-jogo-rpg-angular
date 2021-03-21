@@ -5,7 +5,7 @@
     [ngClass]="{'desactive-mapa': !mapa.mapSelected}">
 
     <article *ngFor="let tips of mapa.positionTips; let iTips = index" class="tips-mapa"
-      [ngStyle]="{'top': tips.x + 'px', 'left': tips.y + 'px'}" (click)="moveHeroToMap(tips.id)">
+      [ngStyle]="{'top': tips.x + 'px', 'left': tips.y + 'px'}" (click)="moveHeroToTips(tips.id)">
       <img src="./assets/images/details/actions/btn/btn-tips.png" alt="Detalhes no Mapa">
     </article>
 

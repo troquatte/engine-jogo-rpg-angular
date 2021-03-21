@@ -25,6 +25,7 @@ export class SoundMapService {
       this.playAmbientSound.src = "./assets/sounds/ambients/music-ambient.mp3";
       this.playAmbientSound.volume = this.playAmbientVolume;
     } else {
+      this.playAmbientSound.loop = true;
       this.playAmbientSound.play();
     }
   }
@@ -37,7 +38,6 @@ export class SoundMapService {
       this.playObjectsSound.volume = this.playObjectsSoundVolume;
     }
 
-    this.playObjectsSound.loop;
     this.playObjectsSound.play();
   }
 
