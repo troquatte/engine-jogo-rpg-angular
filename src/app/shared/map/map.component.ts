@@ -71,8 +71,8 @@ export class MapComponent implements OnInit, DoCheck {
       });
 
       if (findTips) {
-        this.positionHero.x = (findMap.x + findTips.x) - (60 - 24);
-        this.positionHero.y = (findMap.y + findTips.y) - (60 - 24);
+        this.positionHero.x = (findMap.x + findTips.x) - (60 - 15);
+        this.positionHero.y = (findMap.y + findTips.y) - (60 - 15);
 
         setTimeout(() => {
           this.soundMapService.getPlayObjectsSound("./assets/sounds/check.mp3");
@@ -96,8 +96,8 @@ export class MapComponent implements OnInit, DoCheck {
       })
 
       if (findNextMap) {
-        this.positionHero.x = (findNextMap.from.x + findMap.x) - (60 - 24);
-        this.positionHero.y = (findNextMap.from.y + findMap.y) - (60 - 24);
+        this.positionHero.x = (findNextMap.from.x + findMap.x) - (60 - 15);
+        this.positionHero.y = (findNextMap.from.y + findMap.y) - (60 - 15);
         this.positionHero.mapaId = findNextMap.to.mapaId;
 
         let heroPositionNextMap = this.positionMap.find((mapa) => {
