@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, OnDestroy, OnInit } from '@angular/core';
 
 //Models
 import { PositionMap } from 'src/app/models/position-map';
@@ -10,6 +10,7 @@ import { PositionHeroService } from 'src/app/services/position-hero.service';
 //Service Router Maps
 import { RouterMapsService } from 'src/app/services/router-maps.service';
 import { ActivatedRoute } from '@angular/router';
+import { SoundMapService } from 'src/app/services/sound-map.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, DoCheck {
 
   public positionHero: PositionHero = this.positionHeroService.selectHero();
 
@@ -27,11 +28,11 @@ export class MapComponent implements OnInit {
   constructor(
     private routerMapsService: RouterMapsService,
     private positionHeroService: PositionHeroService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private soundMapService: SoundMapService
   ) { }
 
   ngOnInit(): void {
-
     this.activatedRoute.params.subscribe(
       res => {
         if (res.id) {
@@ -42,12 +43,20 @@ export class MapComponent implements OnInit {
     );
 
     this.positionHeroService.getGamePlayHero().subscribe(
-      res => this.positionHero = res
+      res => {
+        this.positionHero = res;
+      }
     )
 
     this.routerMapsService.switchMaps(this.stageMap).subscribe(
-      res => this.positionMap = res
+      res => {
+        this.positionMap = res
+      }
     )
+  }
+
+  ngDoCheck() {
+    this.soundMapService.getPlayAmbientSound();
   }
 
   public moveHeroToMap(idTips: number) {
@@ -66,10 +75,7 @@ export class MapComponent implements OnInit {
         this.positionHero.y = (findMap.y + findTips.y) - (60 - 24);
 
         setTimeout(() => {
-          let audio = new Audio();
-          audio.src = "./assets/check.mp3";
-          audio.volume = 0.1;
-          audio.play();
+          this.soundMapService.getPlayObjectsSound("./assets/sounds/check.mp3");
         }, 1000)
       }
     }
@@ -102,11 +108,7 @@ export class MapComponent implements OnInit {
           heroPositionNextMap.disabled = true;
         }
 
-
-        let audio = new Audio();
-        audio.src = "./assets/open-door.mp3";
-        audio.volume = 0.1;
-        audio.play();
+        this.soundMapService.getPlayObjectsSound("./assets/sounds/open-door.mp3");
 
         setTimeout(() => {
           if (heroPositionNextMap && findNextMap) {

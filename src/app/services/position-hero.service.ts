@@ -9,38 +9,32 @@ import { PositionHero } from '../models/position-hero';
 })
 export class PositionHeroService {
 
-  //Position null
-  private nullHero: PositionHero = {
+  //MyHero
+  private myHero: PositionHero = {
     y: 0,
     x: 0,
-    mapaId: 0,
+    mapaId: 1,
     avatar: ``
   }
 
   //Type Heroes
-  private captain: PositionHero = {
-    y: 100,
-    x: 100,
-    mapaId: 1,
-    avatar: `url('../../../assets/images/hero.jpg')`
-  }
+  private captain: string = `url('../../../assets/images/heroes/captain.jpg')`
 
   //Hero selected Game Play
-  private gamePlayHero: PositionHero = this.nullHero;
+  private gamePlayHero: PositionHero = this.myHero;
 
   constructor() { }
-
 
   //SelectHero
   public selectHero(hero?: string) {
 
     switch (hero) {
       case `captain`:
-        this.gamePlayHero = this.captain;
+        this.myHero.avatar = this.captain;
         break;
     }
 
-    return this.nullHero;
+    return this.myHero;
 
   }
 
@@ -51,5 +45,9 @@ export class PositionHeroService {
         return subscribe.next(this.gamePlayHero)
       }
     })
+  }
+
+  public setGamePlayHero() {
+    return this.myHero;
   }
 }

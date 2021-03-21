@@ -1,24 +1,26 @@
 import { Injectable } from '@angular/core';
+import { PositionMapPhasesService } from './position-map-phases.service';
 
 //Models
 import { PositionMap } from '../models/position-map';
 
+//Position Hero
+import { PositionHeroService } from './position-hero.service';
+
 @Injectable({
   providedIn: 'root'
 })
-export class PositionMapPhaseOneService {
-
-  private initialPositionMap: number = 20;
+export class PositionMapPhaseOneService extends PositionMapPhasesService {
 
   private positionMap: Array<PositionMap> = [
     {
       id: 1,
-      y: this.initialPositionMap + 0,
+      y: 0,
       x: this.initialPositionMap + 0,
       width: 564,
       height: 564,
       disabled: true,
-      background: 'url(assets/images/mapa-baixo.jpg)',
+      background: 'url(assets/images/maps/mapa-baixo.jpg)',
       positionTips: [
         {
           id: 1,
@@ -43,12 +45,12 @@ export class PositionMapPhaseOneService {
     },
     {
       id: 2,
-      y: this.initialPositionMap + 0,
+      y: 0,
       x: this.initialPositionMap + 564,
       width: 564,
       height: 564,
       disabled: false,
-      background: 'url(assets/images/mapa.jpg)',
+      background: 'url(assets/images/maps/mapa.jpg)',
       positionTips: [
         {
           id: 5,
@@ -73,9 +75,20 @@ export class PositionMapPhaseOneService {
     }
   ];
 
-  constructor() { }
+  constructor(
+    private positionHeroService: PositionHeroService,
+  ) {
+    super();
+
+    this.initialPositionHeroMap = {
+      y: 100,
+      x: 100
+    }
+  }
 
   public getPositionMap() {
+    this.positionHeroService.setGamePlayHero().y = this.initialPositionHeroMap.y;
+    this.positionHeroService.setGamePlayHero().x = this.initialPositionHeroMap.x;
     return this.positionMap;
   }
 }
