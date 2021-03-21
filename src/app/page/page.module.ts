@@ -6,6 +6,7 @@ import { PageRoutingModule } from './page.routing.module';
 
 //Pages
 import { GamePlayComponent } from './game-play/game-play.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { GamePlayComponent } from './game-play/game-play.component';
   ],
   imports: [
     CommonModule,
-    PageRoutingModule
+    PageRoutingModule,
+    SharedModule
   ]
 })
 export class PageModule { }

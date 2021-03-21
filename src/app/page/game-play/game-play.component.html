@@ -7,24 +7,16 @@
   </p>
 </div> -->
 
-<div class="user" [ngStyle]="{'top': positionHero.x + 'px', 'left': positionHero.y  + 'px'}"></div>
+<!-- <div class="bordas canto-left-top"></div>
+<div class="bordas canto-left-bottom"></div>
+<div class="bordas canto-right-top"></div>
+<div class="bordas canto-right-bottom"></div>
 
-<ng-template ngFor let-map [ngForOf]="positionMap">
-  <div class="mapa" *ngIf="map.disabled"
-    [ngStyle]="{'top': map.x + 'px', 'left': map.y + 'px', 'width': map.width + 'px', 'height': map.height + 'px', 'background': map.background }">
+<div class="borda-top"></div>
+<div class="borda-right"></div>
+<div class="borda-bottom"></div>
+<div class="borda-left"></div> -->
 
-    <div *ngFor="let tips of map.positionTips; let iTips = index" class="tips"
-      [ngStyle]="{'top': tips.x + 'px', 'left': tips.y + 'px'}">
-      {{iTips + 1}}
-      <ul>
-        <li (click)="moveHeroToMap(tips.id)">
-          Checar
-        </li>
-      </ul>
-    </div>
 
-    <div class="next-map" *ngFor="let item of map.positionFromTo" (click)="moveHeroFromToMap(item.to.mapaId)"
-      [ngStyle]="{'top': item.from.x + 'px', 'left': item.from.y + 'px' }">
-    </div>
-  </div>
-</ng-template>
+<game-hero></game-hero>
+<game-map></game-map>

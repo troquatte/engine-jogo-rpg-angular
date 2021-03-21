@@ -9,7 +9,11 @@ import { GamePlayComponent } from './game-play/game-play.component';
 
 const InitialRoutes: Routes = [
   {
-    path: 'game-play',
+    path: '',
+    component: GamePlayComponent
+  },
+  {
+    path: ':id',
     component: GamePlayComponent
   },
 ];

@@ -1,116 +1,109 @@
 :host{
-  padding: 0;
-  margin: 0;
   position: relative;
-}
-
-.mapa{
-  position: absolute;
-}
-
-.next-map{
-  cursor: pointer;
-
-  width: 20px;
-  height: 20px;
-
-  border-radius: 50%;
-  border: 2px solid rgb(69, 69, 69);
-  background: #75ffa7;
-
-  position: absolute;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  -webkit-box-shadow: 0px 10px 10px 0px rgb(0 0 0 / 80%);
-  -moz-box-shadow: 0px 10px 10px 0px rgb(0 0 0 / 80%);
-  box-shadow: 0px 10px 10px 0px rgb(0 0 0 / 80%);
-
-  z-index: 9999;
-}
-
-.user{
-  width: 50px;
-  height: 50px;
-
-  border-radius: 50%;
-  border: 5px solid #FFF;
-  background: url('../../../assets/images/hero.jpg') no-repeat;
-
-
-  position: absolute;
-
-
-  -webkit-box-shadow: 0px 10px 10px 0px rgb(0 0 0 / 80%);
-  -moz-box-shadow: 0px 10px 10px 0px rgb(0 0 0 / 80%);
-  box-shadow: 0px 10px 10px 0px rgb(0 0 0 / 80%);
-
-  transition: 1s ease-out;
-  z-index: 9999;
-}
-
-.tips{
-  width: 20px;
-  height: 20px;
-
-  border-radius: 50%;
-  border: 2px solid rgb(69, 69, 69);
-  background: #FFF;
-
-  position: absolute;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  -webkit-box-shadow: 0px 10px 10px 0px rgb(0 0 0 / 80%);
-  -moz-box-shadow: 0px 10px 10px 0px rgb(0 0 0 / 80%);
-  box-shadow: 0px 10px 10px 0px rgb(0 0 0 / 80%);
-
-  z-index: 9999;
-
-  ul{
-    display: none;
-    list-style: none;
-    position: absolute;
-    margin: 0;
-    left: 0;
-    padding: 2px 25px;
-
-    li{
-      padding: 5px 10px;
-      background: #FFF;
-      border-left: 5px solid #aa00ff;
-      border-radius: 20px 0 0 20px;
-      cursor: pointer;
-    }
-  }
-
-  &:hover{
-
-    ul{
-      display: block;
-    }
-  }
-}
-
-
-.eventsPage{
-  transition: 1s;
-  position: absolute;
-  bottom: -20px;
-  left: 20px;
-  border-radius: 20px;
-  background: #FFF;
+  display: block;
+  height: 100%;
+  width: 100%;
   padding: 20px;
-
-  -webkit-box-shadow: 0px 10px 10px 0px rgb(0 0 0 / 10%);
-  -moz-box-shadow: 0px 10px 10px 0px rgb(0 0 0 / 10%);
-  box-shadow: 0px 10px 10px 0px rgb(0 0 0 / 10%);
-
-  p{
-    margin: 0;
-  }
+  box-sizing: border-box;
 }
+
+.canto-left-top{
+  background: url('../../../assets/images/borda-left-top.png') no-repeat;
+  position: fixed;
+
+  width: 76px;
+  height: 76px;
+
+  top: 0;
+  left: 0;
+
+  z-index: 9999;
+}
+
+.canto-left-bottom{
+  background: url('../../../assets/images/borda-left-bottom.png') no-repeat;
+  position: fixed;
+
+  width: 76px;
+  height: 76px;
+
+  bottom: 0;
+  left: 0;
+
+  z-index: 9999;
+}
+
+.canto-right-top{
+  background: url('../../../assets/images/borda-right-top.png') no-repeat;
+  position: fixed;
+
+  width: 76px;
+  height: 76px;
+
+  top: 0;
+  right: 0;
+
+  z-index: 9999;
+}
+
+.canto-right-bottom{
+  background: url('../../../assets/images/borda-right-bottom.png') no-repeat;
+  position: fixed;
+
+  width: 76px;
+  height: 76px;
+
+  bottom: 0;
+  right: 0;
+
+  z-index: 9999;
+}
+
+.borda-top{
+  background: url('../../../assets/images/borda-top.png') repeat-x;
+  position: fixed;
+
+  width: 100%;
+  height: 19px;
+
+  top: 0;
+
+  z-index: 9998;
+}
+
+.borda-right{
+  background: url('../../../assets/images/borda-right.png') repeat-y;
+  position: fixed;
+
+  height: 100%;
+  width: 19px;
+
+  right: 0;
+
+  z-index: 9998;
+}
+
+.borda-bottom{
+  background: url('../../../assets/images/borda-bottom.png') repeat-x;
+  position: fixed;
+
+  width: 100%;
+  height: 19px;
+
+  bottom: 0;
+
+  z-index: 9998;
+}
+
+.borda-left{
+  background: url('../../../assets/images/borda-left.png') repeat-y;
+  position: fixed;
+
+  height: 100%;
+  width: 19px;
+
+  left: 0;
+
+  z-index: 9998;
+}
+
