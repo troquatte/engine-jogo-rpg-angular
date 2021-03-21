@@ -1,0 +1,12 @@
+export interface PositionMap {
+  id: number,
+  y: number,
+  x: number,
+  width: number,
+  height: number,
+  disabled?: boolean,
+  background?: string,
+  positionTips?: Array<{ id: number, y: number, x: number; event: string }>,
+  positionNextMap?: Array<{ y: number, x: number }>,
+  positionFromTo?: Array<{ id: number, from: { mapaId: number, y: number, x: number }, to: { mapaId: number, y: number, x: number } }>
+}
