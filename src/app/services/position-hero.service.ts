@@ -18,7 +18,7 @@ export class PositionHeroService {
   }
 
   //Type Heroes
-  private captain: string = `url('../../../assets/images/heroes/captain.jpg')`
+  private captain: string = `url('assets/images/heroes/captain.jpg')`
 
   //Hero selected Game Play
   private gamePlayHero: PositionHero = this.myHero;

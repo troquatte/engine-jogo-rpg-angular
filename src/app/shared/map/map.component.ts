@@ -88,7 +88,6 @@ export class MapComponent implements OnInit, DoCheck {
       return this.positionHero.mapaId === mapa.id
     });
 
-
     if (findMap?.positionFromTo) {
 
       let findNextMap = findMap.positionFromTo.find(result => {
@@ -111,6 +110,14 @@ export class MapComponent implements OnInit, DoCheck {
         this.soundMapService.getPlayObjectsSound("./assets/sounds/open-door.mp3");
 
         setTimeout(() => {
+          this.positionMap.map((mapa) => {
+            if (heroPositionNextMap?.id == mapa.id) {
+              return mapa.mapSelected = true;
+            }
+
+            return mapa.mapSelected = false;
+          })
+
           if (heroPositionNextMap && findNextMap) {
             this.positionHero.x = (heroPositionNextMap.x + findNextMap.to.x);
             this.positionHero.y = (heroPositionNextMap.y + findNextMap.to.y);

@@ -4,6 +4,7 @@ export interface PositionMap {
   x: number,
   width: number,
   height: number,
+  mapSelected?: boolean,
   disabled?: boolean,
   background?: string,
   positionTips?: Array<{ id: number, y: number, x: number; event: string }>,

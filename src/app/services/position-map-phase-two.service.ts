@@ -17,6 +17,7 @@ export class PositionMapPhaseTwoService extends PositionMapPhasesService {
       x: this.initialPositionMap + 0,
       width: 564,
       height: 564,
+      mapSelected: true,
       disabled: true,
       background: 'url(assets/images/maps/mapa.jpg)',
     }

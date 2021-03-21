@@ -20,6 +20,7 @@ export class PositionMapPhaseOneService extends PositionMapPhasesService {
       width: 564,
       height: 564,
       disabled: true,
+      mapSelected: true,
       background: 'url(assets/images/maps/mapa-baixo.jpg)',
       positionTips: [
         {
