@@ -83,8 +83,10 @@ export class MapComponent implements OnInit, DoCheck {
           this.soundMapService.getPlayObjectsSound("./assets/sounds/check.mp3");
 
           const dialogRef = this.dialog.open(ModalTipsComponent, {
-            width: '100%',
-            minHeight: '200px',
+            minWidth: '50%',
+            maxWidth: '80%',
+            minHeight: '100px',
+            data: { event: findTips?.event }
           });
 
           dialogRef.afterClosed().subscribe(result => {

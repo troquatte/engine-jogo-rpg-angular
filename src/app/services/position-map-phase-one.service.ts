@@ -27,7 +27,7 @@ export class PositionMapPhaseOneService extends PositionMapPhasesService {
           id: 1,
           y: 420,
           x: 420,
-          event: "Você é bixão mesmo quer saber mais sobre o assunto? Arrasta pra cima!"
+          event: "Testando modal 1 com interação de texto"
         }
       ],
       positionFromTo: [
@@ -57,7 +57,7 @@ export class PositionMapPhaseOneService extends PositionMapPhasesService {
           id: 5,
           y: 320,
           x: 320,
-          event: "Aeeeeee Funfouuuu"
+          event: "Testando modal 2 com interação de texto"
         },
       ],
       positionFromTo: [

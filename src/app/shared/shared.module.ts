@@ -9,6 +9,7 @@ import { HeroComponent } from './hero/hero.component';
 import { MapComponent } from './map/map.component';
 import { SoundComponent } from './sound/sound.component';
 import { ModalTipsComponent } from './modal/modal-tips/modal-tips.component';
+import { ModalComponent } from './frame/modal/modal.component';
 
 
 
@@ -17,13 +18,15 @@ import { ModalTipsComponent } from './modal/modal-tips/modal-tips.component';
     HeroComponent,
     MapComponent,
     SoundComponent,
-    ModalTipsComponent
+    ModalTipsComponent,
+    ModalComponent
   ],
   exports: [
     HeroComponent,
     MapComponent,
     SoundComponent,
-    ModalTipsComponent
+    ModalTipsComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,

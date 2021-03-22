@@ -1,0 +1,83 @@
+
+.modal{
+  width: 89px;
+  height: 90px;
+  position: absolute;
+  z-index: 1;
+
+  &.modal-top-left{
+    top: 0;
+    left: 0;
+
+    background: url('../../../../assets/images/details/modals/tips/modal-top-left.png') no-repeat;
+  }
+
+  &.modal-top-right{
+    width: 90px;
+
+    top: 0;
+    right: 0;
+
+    background: url('../../../../assets/images/details/modals/tips/modal-top-right.png') no-repeat;
+  }
+
+  &.modal-bottom-left{
+    height: 89px;
+
+    bottom: 0;
+    left: 0;
+
+    background: url('../../../../assets/images/details/modals/tips/modal-bottom-left.png') no-repeat;
+  }
+
+  &.modal-bottom-right{
+    bottom: 0;
+    right: 0;
+
+    background: url('../../../../assets/images/details/modals/tips/modal-bottom-right.png') no-repeat;
+  }
+}
+
+
+.line-h {
+  width: 100%;
+  height: 30px;
+  position: absolute;
+
+  &.line-top{
+    top: 0;
+    left: 0;
+
+    background: url('../../../../assets/images/details/modals/tips/modal-linha-top.png') repeat-x;
+  }
+
+  &.line-bottom{
+    bottom: 0;
+    left: 0;
+
+    background: url('../../../../assets/images/details/modals/tips/modal-linha-bottom.png') repeat-x;
+  }
+}
+
+
+.line-v{
+  position: absolute;
+
+  width: 30px;
+  height: 100%;
+
+  &.line-left{
+    top: 0;
+    left: 0;
+
+    background: url('../../../../assets/images/details/modals/tips/modal-linha-left.png') repeat-y;
+  }
+
+  &.line-right{
+    top: 0;
+    right: 0;
+
+    background: url('../../../../assets/images/details/modals/tips/modal-linha-right.png') repeat-y;
+  }
+}
+
