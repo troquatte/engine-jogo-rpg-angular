@@ -4,15 +4,33 @@
     [ngStyle]="{'top': mapa.x + 'px', 'left': mapa.y + 'px', 'width': mapa.width + 'px', 'height': mapa.height + 'px', 'background': mapa.background}"
     [ngClass]="{'desactive-mapa': !mapa.mapSelected}">
 
-    <article *ngFor="let tips of mapa.positionTips; let iTips = index" class="tips-mapa"
+    <article class="tips-mapa" *ngFor="let tips of mapa.positionTips; let iTips = index"
       [ngStyle]="{'top': tips.x + 'px', 'left': tips.y + 'px'}" (click)="moveHeroToTips(tips.id)">
       <img src="./assets/images/details/actions/btn/btn-tips.png" alt="Detalhes no Mapa">
     </article>
 
-    <article class="next-mapa" *ngFor="let item of mapa.positionFromTo"
-      [ngStyle]="{'top': item.from.x + 'px', 'left': item.from.y + 'px' }" (click)="moveHeroFromToMap(item.to.mapaId)">
+    <article class="next-mapa" *ngFor="let next of mapa.positionFromTo"
+      [ngStyle]="{'top': next.from.x + 'px', 'left': next.from.y + 'px' }" (click)="moveHeroFromToMap(next.to.mapaId)">
       <img src="./assets/images/details/actions/btn/btn-next-map.png" alt="Próximo Mapa">
     </article>
+
+    <ng-template ngFor let-enemy [ngForOf]="mapa.positionEnemy" let-i="index">
+      <article class="enemy-mapa" (click)="atkEnemy(enemy)"
+        [ngStyle]="{'top': enemy.x + 'px', 'left': enemy.y + 'px', 'background': enemy.avatar }">
+
+        <div class="enemy-selected">
+          <input type="radio" [id]="i" name="enemy">
+          <label [for]="i"></label>
+        </div>
+
+        <div class="hp">
+          {{enemy.attribute.hp}}
+        </div>
+      </article>
+    </ng-template>
+
   </section>
 
 </ng-template>
+
+<game-fighting-system *ngIf="positionHero.fight"></game-fighting-system>

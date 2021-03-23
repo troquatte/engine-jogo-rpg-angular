@@ -1,0 +1,37 @@
+
+
+#sistema-de-luta{
+  background: #FFF;
+
+  position: fixed;
+  bottom: 0;
+
+  width: 320px;
+  z-index: 9990;
+
+  display: flex;
+  align-items: center;
+  justify-self: center;
+}
+
+
+#sistema-enemy{
+  background: #FFF;
+
+  position: fixed;
+  bottom: 0;
+  right: 0;
+
+  width: 320px;
+  z-index: 9990;
+
+  display: flex;
+  align-items: center;
+  justify-self: center;
+
+  ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+  }
+}

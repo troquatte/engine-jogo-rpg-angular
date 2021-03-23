@@ -72,6 +72,50 @@ export class PositionMapPhaseOneService extends PositionMapPhasesService {
             y: 85, x: 430
           }
         }
+      ],
+      positionEnemy: [
+        {
+          id: 1,
+          name: 'Orc',
+          y: 300,
+          x: 300,
+          actionFight: false,
+          avatar: 'url(assets/images/enemy/orcs/orc-1.jpg)',
+          attribute: {
+            atk: 0,
+            def: 0,
+            hp: 10,
+            mana: 0,
+          }
+        },
+        {
+          id: 2,
+          name: 'Orc',
+          y: 200,
+          x: 200,
+          actionFight: false,
+          avatar: 'url(assets/images/enemy/orcs/orc-2.jpg)',
+          attribute: {
+            atk: 0,
+            def: 0,
+            hp: 10,
+            mana: 0,
+          }
+        },
+        {
+          id: 3,
+          name: 'Orc',
+          y: 400,
+          x: 400,
+          actionFight: false,
+          avatar: 'url(assets/images/enemy/orcs/orc-3.jpg)',
+          attribute: {
+            atk: 0,
+            def: 0,
+            hp: 10,
+            mana: 0,
+          }
+        }
       ]
     }
   ];

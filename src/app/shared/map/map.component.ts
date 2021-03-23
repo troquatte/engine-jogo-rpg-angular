@@ -16,6 +16,9 @@ import { ActivatedRoute } from '@angular/router';
 import { SoundMapService } from 'src/app/services/sound-map.service';
 import { ModalTipsComponent } from '../modal/modal-tips/modal-tips.component';
 
+//Service FigthSystem
+import { FightingSystemService } from 'src/app/services/fighting-system.service';
+
 
 @Component({
   selector: 'game-map',
@@ -34,7 +37,8 @@ export class MapComponent implements OnInit, DoCheck {
     private positionHeroService: PositionHeroService,
     private activatedRoute: ActivatedRoute,
     private soundMapService: SoundMapService,
-    public dialog: MatDialog
+    private fightingSystemService: FightingSystemService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -51,13 +55,15 @@ export class MapComponent implements OnInit, DoCheck {
       res => {
         this.positionHero = res;
       }
-    )
+    );
 
-    this.routerMapsService.switchMaps(this.stageMap).subscribe(
+    this.routerMapsService.switchMaps(this.stageMap)
+
+    this.routerMapsService.getGamePlayMaps().subscribe(
       res => {
         this.positionMap = res
       }
-    )
+    );
   }
 
   ngDoCheck() {
@@ -65,6 +71,9 @@ export class MapComponent implements OnInit, DoCheck {
   }
 
   public moveHeroToTips(idTips: number) {
+    if (this.positionHero.fight) {
+      return;
+    }
 
     let findMap = this.positionMap.find((mapa) => {
       return this.positionHero.mapaId === mapa.id
@@ -82,6 +91,8 @@ export class MapComponent implements OnInit, DoCheck {
         setTimeout(() => {
           this.soundMapService.getPlayObjectsSound("./assets/sounds/check.mp3");
 
+          //Open Dialog
+          this.dialog.closeAll();
           const dialogRef = this.dialog.open(ModalTipsComponent, {
             minWidth: '50%',
             maxWidth: '80%',
@@ -92,14 +103,17 @@ export class MapComponent implements OnInit, DoCheck {
           dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
           });
-
+          //end Open Dialog
         }, 500)
       }
     }
 
   }
 
-  public moveHeroFromToMap(idNextMap: number) {
+  public async moveHeroFromToMap(idNextMap: number) {
+    if (this.positionHero.fight) {
+      return;
+    }
 
     let findMap = this.positionMap.find((mapa) => {
       return this.positionHero.mapaId === mapa.id
@@ -124,24 +138,59 @@ export class MapComponent implements OnInit, DoCheck {
           heroPositionNextMap.disabled = true;
         }
 
-        this.soundMapService.getPlayObjectsSound("./assets/sounds/open-door.mp3");
+        if (heroPositionNextMap && findNextMap) {
+          this.soundMapService.getPlayObjectsSound("./assets/sounds/open-door.mp3");
 
-        setTimeout(() => {
-          this.positionMap.map((mapa) => {
-            if (heroPositionNextMap?.id == mapa.id) {
-              return mapa.mapSelected = true;
-            }
+          await new Promise(resolve => setTimeout(() => {
+            //Apaga os mapas deseativados
+            this.positionMap.map((mapa) => {
+              if (heroPositionNextMap?.id == mapa.id) {
+                return mapa.mapSelected = true;
+              }
 
-            return mapa.mapSelected = false;
-          })
+              return mapa.mapSelected = false;
+            })
+            resolve(true);
+          }, 2000));
 
-          if (heroPositionNextMap && findNextMap) {
-            this.positionHero.x = (heroPositionNextMap.x + findNextMap.to.x);
-            this.positionHero.y = (heroPositionNextMap.y + findNextMap.to.y);
-          }
-        }, 2000)
+          this.positionHero.x = (heroPositionNextMap.x + findNextMap.to.x);
+          this.positionHero.y = (heroPositionNextMap.y + findNextMap.to.y);
+
+          setTimeout(() => {
+            this.moveHeroEnemy(idNextMap);
+          }, 1000);
+        }
+
       }
 
     }
+  }
+
+  //REFATORAR
+  public moveHeroEnemy(idMap: number) {
+    let positionMap = this.positionMap.find(res => {
+      return res.id === idMap
+    });
+
+    if (positionMap?.positionEnemy?.length) {
+      this.positionHero.fight = true;
+    }
+  }
+
+  public atkEnemy(id: {
+    id: number,
+    name: string,
+    y: number,
+    x: number,
+    avatar: string,
+    actionFight: boolean,
+    attribute: {
+      atk: number,
+      def: number,
+      hp: number,
+      mana: number
+    }
+  }) {
+    this.fightingSystemService.setSelectedEnemyId(id);
   }
 }

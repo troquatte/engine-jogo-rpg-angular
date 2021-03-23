@@ -10,6 +10,7 @@ import { MapComponent } from './map/map.component';
 import { SoundComponent } from './sound/sound.component';
 import { ModalTipsComponent } from './modal/modal-tips/modal-tips.component';
 import { ModalComponent } from './frame/modal/modal.component';
+import { FightingSystemComponent } from './fighting-system/fighting-system.component';
 
 
 
@@ -19,7 +20,8 @@ import { ModalComponent } from './frame/modal/modal.component';
     MapComponent,
     SoundComponent,
     ModalTipsComponent,
-    ModalComponent
+    ModalComponent,
+    FightingSystemComponent
   ],
   exports: [
     HeroComponent,

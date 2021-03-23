@@ -14,7 +14,14 @@ export class PositionHeroService {
     y: 0,
     x: 0,
     mapaId: 1,
-    avatar: ``
+    avatar: ``,
+    fight: false,
+    fightAction: [
+      {
+        name: "Atk",
+        atk: 10,
+      }
+    ]
   }
 
   //Type Heroes

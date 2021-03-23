@@ -13,22 +13,39 @@ import { PositionMapPhaseTwoService } from './position-map-phase-two.service';
 })
 export class RouterMapsService {
 
+  //MyHero
+  private myMaps: Array<PositionMap> = [
+    {
+      id: 0,
+      y: 0,
+      x: 0,
+      width: 0,
+      height: 0,
+    }
+  ]
+
   constructor(
     private positionMapPhaseOneService: PositionMapPhaseOneService,
     private positionMapPhaseTwoService: PositionMapPhaseTwoService
   ) { }
 
-  public switchMaps(id: string): Observable<Array<PositionMap>> {
+  public switchMaps(id: string) {
+    switch (id) {
+      case '1':
+        this.myMaps = this.positionMapPhaseOneService.getPositionMap()
+        break;
+      case '2':
+        this.myMaps = this.positionMapPhaseTwoService.getPositionMap()
+        break;
+    }
+  }
+
+  //Observable Position Hero Services
+  public getGamePlayMaps(): Observable<Array<PositionMap>> {
     return new Observable((subscribe) => {
-      switch (id) {
-        case '1':
-          subscribe.next(this.positionMapPhaseOneService.getPositionMap())
-          break;
-        case '2':
-          subscribe.next(this.positionMapPhaseTwoService.getPositionMap())
-          break;
+      if (this.myMaps) {
+        return subscribe.next(this.myMaps)
       }
     })
   }
-
 }
