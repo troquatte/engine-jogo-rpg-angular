@@ -6,18 +6,21 @@ export interface PositionPersons {
   x: number,
   avatar: string,
   actionFight: boolean,
-  attribute: {
-    atk: number,
-    def: number,
-    max_hp: number,
-    hp: number,
-    max_mana: number,
-    mana: number
-  }
+  actionFightAnimate?: boolean,
+  attribute: PersonsAttribute,
   fightAction?: [
     {
       name: string,
       atk: number
     },
   ]
+}
+
+export interface PersonsAttribute {
+  atk: number,
+  def: number,
+  max_hp: number,
+  hp: number,
+  max_mana: number,
+  mana: number
 }

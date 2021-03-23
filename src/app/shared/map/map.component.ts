@@ -180,4 +180,8 @@ export class MapComponent implements OnInit, DoCheck {
   public atkEnemy(enemy: PositionPersons) {
     this.fightingSystemService.setSelectedEnemyId(enemy);
   }
+
+  public c(i: any) {
+    return `${i}%`;
+  }
 }

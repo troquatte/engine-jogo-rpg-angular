@@ -28,7 +28,7 @@ export class PositionHeroService {
     fightAction: [
       {
         name: "atack",
-        atk: 5,
+        atk: 3,
       }
     ]
   }

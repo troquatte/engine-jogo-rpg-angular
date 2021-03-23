@@ -12,7 +12,7 @@ export class SoundMapService {
 
   // ObjectSound
   private playObjectsSound: HTMLAudioElement = new Audio();
-  private playObjectsStartVolume: number = 0.1;
+  private playObjectsStartVolume: number = 0.2;
   private playObjectsSoundVolume: number = this.playObjectsStartVolume;
 
   // Paused All Volume

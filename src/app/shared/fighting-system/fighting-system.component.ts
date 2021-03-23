@@ -8,6 +8,7 @@ import { PositionPersons } from 'src/app/models/position-persons';
 import { RouterMapsService } from 'src/app/services/router-maps.service';
 import { PositionHeroService } from 'src/app/services/position-hero.service';
 import { FightingSystemService } from 'src/app/services/fighting-system.service';
+import { SoundMapService } from 'src/app/services/sound-map.service';
 
 @Component({
   selector: 'game-fighting-system',
@@ -24,6 +25,7 @@ export class FightingSystemComponent implements OnInit {
     private positionHeroService: PositionHeroService,
     private routerMapsService: RouterMapsService,
     private fightingSystemService: FightingSystemService,
+    private soundMapService: SoundMapService
   ) { }
 
   ngOnInit(): void {
@@ -59,13 +61,23 @@ export class FightingSystemComponent implements OnInit {
     }
   }
 
-  public atack(atack: number) {
+  public async atack(atack: number) {
     this.fightingSystemService.getSelectedEnemy().subscribe(
-      res => {
+      async (res) => {
         res.attribute.hp = res.attribute.hp - atack;
+        res.actionFightAnimate = true;
+
+        this.soundMapService.getPlayObjectsSound('./assets/images/enemy/orcs/audio/orc.mp3')
+
         if (res.attribute.hp <= 0) {
           this.hideEnemy(res)
         }
+
+        await new Promise(() => {
+          setTimeout(() => {
+            res.actionFightAnimate = false;
+          }, 1000);
+        });
       }
     )
   }

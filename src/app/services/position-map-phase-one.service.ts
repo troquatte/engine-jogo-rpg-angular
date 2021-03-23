@@ -84,8 +84,10 @@ export class PositionMapPhaseOneService extends PositionMapPhasesService {
           attribute: {
             atk: 0,
             def: 0,
+            max_hp: 10,
             hp: 10,
             mana: 0,
+            max_mana: 0
           }
         },
         {
@@ -98,8 +100,10 @@ export class PositionMapPhaseOneService extends PositionMapPhasesService {
           attribute: {
             atk: 0,
             def: 0,
+            max_hp: 10,
             hp: 10,
             mana: 0,
+            max_mana: 0
           }
         },
         {
@@ -112,8 +116,10 @@ export class PositionMapPhaseOneService extends PositionMapPhasesService {
           attribute: {
             atk: 0,
             def: 0,
+            max_hp: 10,
             hp: 10,
             mana: 0,
+            max_mana: 0
           }
         }
       ]
