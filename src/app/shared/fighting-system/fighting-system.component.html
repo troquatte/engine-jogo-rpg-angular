@@ -1,16 +1,3 @@
 <div id="sistema-de-luta">
-  <ul>
-    <li *ngFor="let action of positionHero.fightAction" (click)="atk(action.atk)">
-      {{ action.name }}
-    </li>
-  </ul>
-</div>
-
-
-<div id="sistema-enemy">
-  <ul>
-    <li *ngFor="let enemy of positionEnemy">
-      {{ enemy.name }}
-    </li>
-  </ul>
+  <div class="atack" *ngFor="let action of positionHero.fightAction" (click)="atack(action.atk)"></div>
 </div>

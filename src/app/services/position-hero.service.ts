@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 //Models
-import { PositionHero } from '../models/position-hero';
+import { PositionPersons } from '../models/position-persons';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +10,25 @@ import { PositionHero } from '../models/position-hero';
 export class PositionHeroService {
 
   //MyHero
-  private myHero: PositionHero = {
+  private myHero: PositionPersons = {
+    id: 0,
     y: 0,
     x: 0,
     mapaId: 1,
     avatar: ``,
-    fight: false,
+    actionFight: false,
+    attribute: {
+      atk: 0,
+      def: 0,
+      max_hp: 0,
+      hp: 0,
+      max_mana: 0,
+      mana: 0
+    },
     fightAction: [
       {
-        name: "Atk",
-        atk: 10,
+        name: "atack",
+        atk: 5,
       }
     ]
   }
@@ -28,7 +37,7 @@ export class PositionHeroService {
   private captain: string = `url('assets/images/heroes/captain.jpg')`
 
   //Hero selected Game Play
-  private gamePlayHero: PositionHero = this.myHero;
+  private gamePlayHero: PositionPersons = this.myHero;
 
   constructor() { }
 

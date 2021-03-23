@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 //Models
-import { PositionHero } from 'src/app/models/position-hero';
+import { PositionPersons } from 'src/app/models/position-persons';
 
 //Services
 import { PositionHeroService } from 'src/app/services/position-hero.service';
@@ -13,7 +13,7 @@ import { PositionHeroService } from 'src/app/services/position-hero.service';
 })
 export class HeroComponent implements OnInit {
 
-  public positionHero: PositionHero = this.positionHeroService.selectHero('captain');
+  public positionHero: PositionPersons = this.positionHeroService.selectHero('captain');
 
   constructor(
     private positionHeroService: PositionHeroService,

@@ -1,12 +1,11 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 //Models
 import { PositionMap } from 'src/app/models/position-map';
-import { PositionHero } from 'src/app/models/position-hero';
+import { PositionPersons } from 'src/app/models/position-persons';
 
 //Services
 import { RouterMapsService } from 'src/app/services/router-maps.service';
-import { ActivatedRoute } from '@angular/router';
 import { PositionHeroService } from 'src/app/services/position-hero.service';
 import { FightingSystemService } from 'src/app/services/fighting-system.service';
 
@@ -15,26 +14,11 @@ import { FightingSystemService } from 'src/app/services/fighting-system.service'
   templateUrl: './fighting-system.component.html',
   styleUrls: ['./fighting-system.component.scss']
 })
-export class FightingSystemComponent implements OnInit, DoCheck {
+export class FightingSystemComponent implements OnInit {
 
-  public positionHero: PositionHero = this.positionHeroService.selectHero();
+  public positionHero: PositionPersons = this.positionHeroService.selectHero();
   public positionMap: Array<PositionMap> = [];
-  public positionEnemy: Array<
-    {
-      id: number,
-      name: string,
-      y: number,
-      x: number,
-      avatar: string,
-      actionFight: boolean,
-      attribute?: {
-        atk: number,
-        def: number,
-        hp: number,
-        mana: number
-      }
-    }
-  > = [];
+  public positionEnemy: Array<PositionPersons> = [];
 
   constructor(
     private positionHeroService: PositionHeroService,
@@ -53,36 +37,8 @@ export class FightingSystemComponent implements OnInit, DoCheck {
 
   }
 
-  ngDoCheck() {
-    this.showEnemy()
-  }
 
-  public showEnemy() {
-    let enemy = this.positionMap.find(res => {
-      return this.positionHero.mapaId === res.id;
-    })
-
-    if (enemy?.positionEnemy) {
-      return this.positionEnemy = enemy?.positionEnemy
-    }
-
-    return this.positionEnemy = []
-  }
-
-  public hideEnemy(hideEnemy: {
-    id: number,
-    name: string,
-    y: number,
-    x: number,
-    avatar: string,
-    actionFight: boolean,
-    attribute?: {
-      atk: number,
-      def: number,
-      hp: number,
-      mana: number
-    }
-  }) {
+  public hideEnemy(hideEnemy: PositionPersons) {
 
     let findMap = this.positionMap.find(res => {
       return this.positionHero.mapaId === res.id;
@@ -99,15 +55,15 @@ export class FightingSystemComponent implements OnInit, DoCheck {
     }
 
     if (!findMap?.positionEnemy?.length) {
-      this.positionHero.fight = false;
+      this.positionHero.actionFight = false;
     }
   }
 
-  public atk(atk: number) {
+  public atack(atack: number) {
     this.fightingSystemService.getSelectedEnemy().subscribe(
       res => {
-        res.attribute.hp = atk - res.attribute.hp;
-        if (res.attribute.hp === 0) {
+        res.attribute.hp = res.attribute.hp - atack;
+        if (res.attribute.hp <= 0) {
           this.hideEnemy(res)
         }
       }

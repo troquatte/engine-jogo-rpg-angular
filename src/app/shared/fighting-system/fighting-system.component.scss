@@ -1,37 +1,22 @@
-
-
 #sistema-de-luta{
-  background: #FFF;
-
-  position: fixed;
-  bottom: 0;
-
-  width: 320px;
-  z-index: 9990;
-
-  display: flex;
-  align-items: center;
-  justify-self: center;
-}
-
-
-#sistema-enemy{
-  background: #FFF;
-
   position: fixed;
   bottom: 0;
   right: 0;
 
-  width: 320px;
-  z-index: 9990;
+  padding: 10px 20px;
+
 
   display: flex;
   align-items: center;
   justify-self: center;
 
-  ul{
-    list-style: none;
-    display: flex;
-    flex-direction: column;
+  z-index: 9990;
+
+  cursor: pointer;
+
+  .atack{
+    background: url('../../../assets/images/control-fight/btn-atk.png') no-repeat center center;
+    width: 80px;
+    height: 85px;
   }
 }

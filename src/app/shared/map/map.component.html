@@ -17,7 +17,6 @@
     <ng-template ngFor let-enemy [ngForOf]="mapa.positionEnemy" let-i="index">
       <article class="enemy-mapa" (click)="atkEnemy(enemy)"
         [ngStyle]="{'top': enemy.x + 'px', 'left': enemy.y + 'px', 'background': enemy.avatar }">
-
         <div class="enemy-selected">
           <input type="radio" [id]="i" name="enemy">
           <label [for]="i"></label>
@@ -33,4 +32,4 @@
 
 </ng-template>
 
-<game-fighting-system *ngIf="positionHero.fight"></game-fighting-system>
+<game-fighting-system *ngIf="positionHero.actionFight"></game-fighting-system>

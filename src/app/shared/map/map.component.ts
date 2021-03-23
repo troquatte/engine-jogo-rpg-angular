@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 //Models
 import { PositionMap } from 'src/app/models/position-map';
-import { PositionHero } from 'src/app/models/position-hero';
+import { PositionPersons } from 'src/app/models/position-persons';
 
 //Services
 import { PositionHeroService } from 'src/app/services/position-hero.service';
@@ -27,7 +27,7 @@ import { FightingSystemService } from 'src/app/services/fighting-system.service'
 })
 export class MapComponent implements OnInit, DoCheck {
 
-  public positionHero: PositionHero = this.positionHeroService.selectHero();
+  public positionHero: PositionPersons = this.positionHeroService.selectHero();
 
   public stageMap: string = "1";
   public positionMap: Array<PositionMap> = [];
@@ -71,7 +71,7 @@ export class MapComponent implements OnInit, DoCheck {
   }
 
   public moveHeroToTips(idTips: number) {
-    if (this.positionHero.fight) {
+    if (this.positionHero.actionFight) {
       return;
     }
 
@@ -111,7 +111,7 @@ export class MapComponent implements OnInit, DoCheck {
   }
 
   public async moveHeroFromToMap(idNextMap: number) {
-    if (this.positionHero.fight) {
+    if (this.positionHero.actionFight) {
       return;
     }
 
@@ -173,24 +173,11 @@ export class MapComponent implements OnInit, DoCheck {
     });
 
     if (positionMap?.positionEnemy?.length) {
-      this.positionHero.fight = true;
+      this.positionHero.actionFight = true;
     }
   }
 
-  public atkEnemy(id: {
-    id: number,
-    name: string,
-    y: number,
-    x: number,
-    avatar: string,
-    actionFight: boolean,
-    attribute: {
-      atk: number,
-      def: number,
-      hp: number,
-      mana: number
-    }
-  }) {
-    this.fightingSystemService.setSelectedEnemyId(id);
+  public atkEnemy(enemy: PositionPersons) {
+    this.fightingSystemService.setSelectedEnemyId(enemy);
   }
 }
