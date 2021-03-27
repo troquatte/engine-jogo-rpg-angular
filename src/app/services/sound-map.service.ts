@@ -7,7 +7,7 @@ export class SoundMapService {
 
   // AmbientSound
   private playAmbientSound: HTMLAudioElement = new Audio();
-  private playAmbientStartVolume: number = 0.2;
+  private playAmbientStartVolume: number = 0;
   private playAmbientVolume: number = this.playAmbientStartVolume;
 
   // ObjectSound

@@ -42,6 +42,8 @@ export class MapComponent implements OnInit, DoCheck {
   ) { }
 
   ngOnInit(): void {
+    this.routerMapsService.switchMaps(this.stageMap)
+
     this.activatedRoute.params.subscribe(
       res => {
         if (res.id) {
@@ -57,8 +59,6 @@ export class MapComponent implements OnInit, DoCheck {
       }
     );
 
-    this.routerMapsService.switchMaps(this.stageMap)
-
     this.routerMapsService.getGamePlayMaps().subscribe(
       res => {
         this.positionMap = res
@@ -66,17 +66,21 @@ export class MapComponent implements OnInit, DoCheck {
     );
   }
 
-  ngDoCheck() {
+  async ngDoCheck() {
     this.soundMapService.getPlayAmbientSound();
+
+    if (this.positionHeroService.getValidationTurnGamePlayHero()) {
+      await this.positionHeroService.a();
+    }
   }
 
-  public moveHeroToTips(idTips: number) {
-    if (this.positionHero.actionFight) {
+  public async moveHeroToTips(idTips: number) {
+    if (this.positionHeroService.getValidationTurnGamePlayHero()) {
       return;
     }
 
     let findMap = this.positionMap.find((mapa) => {
-      return this.positionHero.mapaId === mapa.id
+      return this.positionHeroService.setGamePlayHero().mapaId === mapa.id
     });
 
     if (findMap?.positionTips) {
@@ -85,8 +89,11 @@ export class MapComponent implements OnInit, DoCheck {
       });
 
       if (findTips) {
-        this.positionHero.x = (findMap.x + findTips.x) - (60 - 15);
-        this.positionHero.y = (findMap.y + findTips.y) - (60 - 15);
+        this.positionHeroService.setGamePlayHero().x = (findMap.x + findTips.x) - (60 - 15);
+        this.positionHeroService.setGamePlayHero().y = (findMap.y + findTips.y) - (60 - 15);
+
+        //Add Turn Hero
+        this.positionHeroService.setValidationTurnGamePlayHero();
 
         setTimeout(() => {
           this.soundMapService.getPlayObjectsSound("./assets/sounds/check.mp3");
@@ -111,12 +118,12 @@ export class MapComponent implements OnInit, DoCheck {
   }
 
   public async moveHeroFromToMap(idNextMap: number) {
-    if (this.positionHero.actionFight) {
+    if (this.positionHeroService.getValidationTurnGamePlayHero()) {
       return;
     }
 
     let findMap = this.positionMap.find((mapa) => {
-      return this.positionHero.mapaId === mapa.id
+      return this.positionHeroService.setGamePlayHero().mapaId === mapa.id
     });
 
     if (findMap?.positionFromTo) {
@@ -126,9 +133,12 @@ export class MapComponent implements OnInit, DoCheck {
       })
 
       if (findNextMap) {
-        this.positionHero.x = (findNextMap.from.x + findMap.x) - (60 - 15);
-        this.positionHero.y = (findNextMap.from.y + findMap.y) - (60 - 15);
-        this.positionHero.mapaId = findNextMap.to.mapaId;
+        this.positionHeroService.setGamePlayHero().x = (findNextMap.from.x + findMap.x) - (60 - 15);
+        this.positionHeroService.setGamePlayHero().y = (findNextMap.from.y + findMap.y) - (60 - 15);
+        this.positionHeroService.setGamePlayHero().mapaId = findNextMap.to.mapaId;
+
+        //Add Turn Hero
+        this.positionHeroService.setValidationTurnGamePlayHero();
 
         let heroPositionNextMap = this.positionMap.find((mapa) => {
           return findNextMap?.to.mapaId == mapa.id;
@@ -153,8 +163,8 @@ export class MapComponent implements OnInit, DoCheck {
             resolve(true);
           }, 2000));
 
-          this.positionHero.x = (heroPositionNextMap.x + findNextMap.to.x);
-          this.positionHero.y = (heroPositionNextMap.y + findNextMap.to.y);
+          this.positionHeroService.setGamePlayHero().x = (heroPositionNextMap.x + findNextMap.to.x);
+          this.positionHeroService.setGamePlayHero().y = (heroPositionNextMap.y + findNextMap.to.y);
 
           setTimeout(() => {
             this.moveHeroEnemy(idNextMap);
@@ -168,13 +178,13 @@ export class MapComponent implements OnInit, DoCheck {
 
   //REFATORAR
   public moveHeroEnemy(idMap: number) {
-    let positionMap = this.positionMap.find(res => {
-      return res.id === idMap
-    });
+    // let positionMap = this.positionMap.find(res => {
+    //   return res.id === idMap
+    // });
 
-    if (positionMap?.positionEnemy?.length) {
-      this.positionHero.actionFight = true;
-    }
+    // if (positionMap?.positionEnemy?.length) {
+    //   this.positionHeroService.setGamePlayHero().actionFight = true;
+    // }
   }
 
   public atkEnemy(enemy: PositionPersons) {

@@ -1,2 +1,13 @@
+<!-- <div *ngFor="let itens of positionHero.actionHeroInMap; let i = index">
+{{i}}
+</div> -->
+
 <div class="hero"
-  [ngStyle]="{'top': positionHero.x + 'px', 'left': positionHero.y  + 'px', 'background': positionHero.avatar}"></div>
+  [ngStyle]="{'top': positionHero.x + 'px', 'left': positionHero.y  + 'px', 'background': positionHero.avatar}">
+
+  <ul *ngIf="positionHero.actionHeroInMap">
+    <ng-template ngFor let-items [ngForOf]="positionHero.actionHeroInMap" async>
+      <li [ngStyle]="{'background': items.action ? '#fcbc14' : '#342116'}"></li>
+    </ng-template>
+  </ul>
+</div>

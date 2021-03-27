@@ -5,6 +5,7 @@ export interface PositionPersons {
   y: number,
   x: number,
   avatar: string,
+  actionHeroInMap?: Array<{ action: boolean }>,
   actionFight: boolean,
   actionFightAnimate?: boolean,
   attribute: PersonsAttribute,
