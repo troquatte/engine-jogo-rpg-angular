@@ -13,7 +13,6 @@ export class FightingSystemService {
     y: 0,
     x: 0,
     avatar: "",
-    actionFight: false,
     attribute: {
       atk: 0,
       def: 0,
@@ -27,10 +26,8 @@ export class FightingSystemService {
   constructor() { }
 
   //Observable Position Hero Services
-  public getSelectedEnemy(): Observable<PositionPersons> {
-    return new Observable(subscribe => {
-      subscribe.next(this.selectedEnemy);
-    });
+  public getSelectedEnemy() {
+    return this.selectedEnemy;
   }
 
   public setSelectedEnemyId(enemy: PositionPersons) {

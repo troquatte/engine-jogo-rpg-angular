@@ -14,27 +14,65 @@
 
   transition: 1s ease-out;
   z-index: 1;
-}
 
-ul{
-  width: 15px;
-  list-style: none;
-  position: absolute;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  ul{
+    width: 15px;
+    list-style: none;
+    position: absolute;
 
-  left: -25px;
-  top: -5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 
-  li{
-    width: 10px;
-    height: 10px;
-    background: #342116;
-    border: 2px solid #fcbc14;
-    border-radius: 50px;
-    margin-bottom: 5px;
+    left: -25px;
+    top: -5px;
+
+    li{
+      width: 15px;
+      height: 15px;
+      background: url('../../../assets/images/heroes/hero-turn-true.png') no-repeat center center;
+      margin-bottom: 5px;
+    }
+
+  }
+
+  .attribute{
+    .max-hp{
+      width: 100%;
+      height: 5px;
+      background: #342116;
+      border: 2px solid #fcbc14;
+      position: absolute;
+      bottom: -17px;
+      z-index: 0;
+    }
+
+    .real-hp{
+      width: 100%;
+      height: 5px;
+      background: #ff3b3b;
+      position: absolute;
+      left: 2px;
+      bottom: -15px;
+      z-index: 1;
+      transition: 1s ease-out;
+    }
+
+    .text-hp{
+      position: absolute;
+      bottom: -33px;
+
+      width: 100%;
+
+      font-size: 10px;
+      color: #342116;
+      text-align: center;
+      line-height: 120%;
+
+      background: #fcbc14;
+      border: 2px solid #fcbc14;
+    }
   }
 }

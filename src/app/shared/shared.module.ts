@@ -11,6 +11,8 @@ import { SoundComponent } from './sound/sound.component';
 import { ModalTipsComponent } from './modal/modal-tips/modal-tips.component';
 import { ModalComponent } from './frame/modal/modal.component';
 import { FightingSystemComponent } from './fighting-system/fighting-system.component';
+import { TurnMitoComponent } from './loading/turn-mito/turn-mito.component';
+import { EnemyComponent } from './enemy/enemy.component';
 
 
 
@@ -21,14 +23,17 @@ import { FightingSystemComponent } from './fighting-system/fighting-system.compo
     SoundComponent,
     ModalTipsComponent,
     ModalComponent,
-    FightingSystemComponent
+    FightingSystemComponent,
+    TurnMitoComponent,
+    EnemyComponent
   ],
   exports: [
     HeroComponent,
     MapComponent,
     SoundComponent,
     ModalTipsComponent,
-    ModalComponent
+    ModalComponent,
+    TurnMitoComponent
   ],
   imports: [
     CommonModule,

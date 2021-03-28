@@ -5,16 +5,10 @@ export interface PositionPersons {
   y: number,
   x: number,
   avatar: string,
-  actionHeroInMap?: Array<{ action: boolean }>,
-  actionFight: boolean,
+  actionFightStopMove?: boolean,
   actionFightAnimate?: boolean,
+  actionHeroInMap?: Array<{ action: boolean }>,
   attribute: PersonsAttribute,
-  fightAction?: [
-    {
-      name: string,
-      atk: number
-    },
-  ]
 }
 
 export interface PersonsAttribute {

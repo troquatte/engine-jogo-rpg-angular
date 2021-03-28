@@ -1,3 +1,3 @@
 <div id="sistema-de-luta">
-  <div class="atack" *ngFor="let action of positionHero.fightAction" (click)="atack(action.atk)"></div>
+  <div class="atack" (click)="atackEnemy(positionHero.attribute.atk)"></div>
 </div>

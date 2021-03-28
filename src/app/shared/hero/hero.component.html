@@ -7,7 +7,16 @@
 
   <ul *ngIf="positionHero.actionHeroInMap">
     <ng-template ngFor let-items [ngForOf]="positionHero.actionHeroInMap" async>
-      <li [ngStyle]="{'background': items.action ? '#fcbc14' : '#342116'}"></li>
+      <li
+        [ngStyle]="{'background': items.action ? 'url(./assets/images/heroes/hero-turn-false.png)' : 'url(./assets/images/heroes/hero-turn-true.png)'}">
+      </li>
     </ng-template>
   </ul>
+
+  <section class="attribute">
+    <div class="text-hp">{{positionHero.attribute.hp}} / {{positionHero.attribute.max_hp}}</div>
+    <div class="real-hp"
+      [ngStyle]="{'width': lifeHero((positionHero.attribute.hp * 100) / positionHero.attribute.max_hp)}"></div>
+    <div class="max-hp"></div>
+  </section>
 </div>

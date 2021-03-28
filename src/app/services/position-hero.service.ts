@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable, interval } from 'rxjs';
-import { delay, map, subscribeOn } from 'rxjs/operators';
 
 //Models
 import { PositionPersons } from '../models/position-persons';
@@ -22,7 +20,6 @@ export class PositionHeroService {
       { action: false },
       { action: false },
     ],
-    actionFight: false,
     attribute: {
       atk: 0,
       def: 0,
@@ -30,17 +27,8 @@ export class PositionHeroService {
       hp: 0,
       max_mana: 0,
       mana: 0
-    },
-    fightAction: [
-      {
-        name: "atack",
-        atk: 3,
-      }
-    ]
+    }
   }
-
-  //Type Heroes
-  private captain: string = `url('assets/images/heroes/captain.jpg')`
 
   //Hero selected Game Play
   private gamePlayHero: PositionPersons = this.myHero;
@@ -55,21 +43,20 @@ export class PositionHeroService {
 
     switch (hero) {
       case `captain`:
-        this.myHero.avatar = this.captain;
+        this.myHero.id = 1;
+        this.myHero.avatar = `url('assets/images/heroes/captain.jpg')`;
+        this.myHero.attribute = {
+          atk: 1,
+          def: 3,
+          max_hp: 10,
+          hp: 10,
+          max_mana: 0,
+          mana: 0
+        };
         break;
     }
 
     return this.myHero;
-
-  }
-
-  //Observable Position Hero Services
-  public getGamePlayHero(): Observable<PositionPersons> {
-    return new Observable((subscribe) => {
-      if (this.gamePlayHero) {
-        return subscribe.next(this.gamePlayHero)
-      }
-    })
   }
 
   //Use Method in services
@@ -78,7 +65,13 @@ export class PositionHeroService {
     return this.myHero;
   }
 
-  public setValidationTurnGamePlayHero(): boolean {
+  //Position Hero Services
+  public getGamePlayHero(): PositionPersons {
+    return this.gamePlayHero;
+  }
+
+  //Turn Game Play Hero
+  public setValidationActionsGamePlayHero(): boolean {
     //Validation Turn Hero
     let turnGame = this.gamePlayHero.actionHeroInMap?.find(turn => {
       return turn.action == false;
@@ -101,27 +94,11 @@ export class PositionHeroService {
     //end Validation All Map Turn Hero
   }
 
-  public getValidationTurnGamePlayHero(): boolean {
+  public getValidationActionsGamePlayHero(): boolean {
     return this.turnGamePlay;
   }
 
-  private runningValidationTurnGamePlayHero: boolean = false;
-  public a(): Promise<boolean> {
-
-    return new Promise((resolve) => {
-      if (!this.runningValidationTurnGamePlayHero) {
-        this.runningValidationTurnGamePlayHero = true;
-        setTimeout(() => {
-          //Validation Turn Hero
-          this.setGamePlayHero().actionHeroInMap?.map(turn => {
-            return turn.action = false;
-          });
-
-          this.runningValidationTurnGamePlayHero = false;
-          this.turnGamePlay = false;
-          return resolve(true);
-        }, 5000)
-      }
-    })
+  public setTurnGamePlayHero(set: boolean): boolean {
+    return this.turnGamePlay = set;
   }
 }

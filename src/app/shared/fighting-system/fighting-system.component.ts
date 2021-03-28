@@ -29,56 +29,81 @@ export class FightingSystemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.positionHeroService.getGamePlayHero().subscribe(
-      res => this.positionHero = res
-    )
+    this.positionHero = this.positionHeroService.getGamePlayHero();
 
     this.routerMapsService.getGamePlayMaps().subscribe(
       res => this.positionMap = res
     )
-
   }
 
+  public async atackEnemy(atack: number) {
+    //Get selected enemy
+    let enemy = this.fightingSystemService.getSelectedEnemy();
 
-  public hideEnemy(hideEnemy: PositionPersons) {
-
+    //Find position map hero
     let findMap = this.positionMap.find(res => {
       return this.positionHero.mapaId === res.id;
     })
 
+    //Verify map enemy Hero
     if (findMap?.positionEnemy) {
-      let enemy = findMap.positionEnemy.filter((res: any) => {
-        if (res.id !== hideEnemy.id) {
-          return res
-        }
+      //Find exists enemy selected in Map
+      let selectedEnemy = findMap.positionEnemy.filter((res: any) => {
+        return res.id == enemy.id;
       })
 
+      //Validation Atack
+      if (!selectedEnemy.length || this.positionHeroService.getValidationActionsGamePlayHero()) {
+        return;
+      }
+
+      //Add Turn Hero
+      this.positionHeroService.setValidationActionsGamePlayHero();
+
+      //Modify Attribute enemy
+      enemy.attribute.hp = enemy.attribute.hp - atack;
+      enemy.actionFightAnimate = true;
+
+      //Play Sound
+      this.soundMapService.getPlayObjectsSound('./assets/images/enemy/orcs/audio/orc.mp3')
+
+      //Verify Hp enemy and kill
+      if (enemy.attribute.hp <= 0) {
+        this.killEnemy(enemy)
+      }
+
+      //Await action Animate Fade Figth
+      await new Promise(() => {
+        setTimeout(() => {
+          enemy.actionFightAnimate = false;
+        }, 1000);
+      });
+    }
+
+
+  }
+
+  public killEnemy(hideEnemy: PositionPersons) {
+    //Find position map hero
+    let findMap = this.positionMap.find(res => {
+      return this.positionHero.mapaId === res.id;
+    })
+
+    //Verify map enemy Hero
+    if (findMap?.positionEnemy) {
+      //Filter kill to enemy
+      let enemy = findMap.positionEnemy.filter((res: any) => {
+        return res.id !== hideEnemy.id
+      })
+
+      //Return actual list enemy array
       findMap.positionEnemy = enemy;
     }
 
+    //Hero enabled move in the map
     if (!findMap?.positionEnemy?.length) {
-      this.positionHero.actionFight = false;
+      this.positionHero.actionFightStopMove = false;
     }
   }
 
-  public async atack(atack: number) {
-    this.fightingSystemService.getSelectedEnemy().subscribe(
-      async (res) => {
-        res.attribute.hp = res.attribute.hp - atack;
-        res.actionFightAnimate = true;
-
-        this.soundMapService.getPlayObjectsSound('./assets/images/enemy/orcs/audio/orc.mp3')
-
-        if (res.attribute.hp <= 0) {
-          this.hideEnemy(res)
-        }
-
-        await new Promise(() => {
-          setTimeout(() => {
-            res.actionFightAnimate = false;
-          }, 1000);
-        });
-      }
-    )
-  }
 }

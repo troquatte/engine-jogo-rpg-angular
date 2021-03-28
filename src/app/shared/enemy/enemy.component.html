@@ -1,0 +1,18 @@
+<ng-template ngFor let-enemy [ngForOf]="mapa.positionEnemy" let-i="index">
+
+  <article class="enemy-mapa" (click)="selectedEnemy(enemy)"
+    [ngStyle]="{'top': enemy.x + 'px', 'left': enemy.y + 'px', 'background': enemy.avatar }"
+    [ngClass]="{'flash': enemy.actionFightAnimate}">
+
+    <div class="enemy-selected">
+      <input type="radio" [id]="i" name="enemy">
+      <label [for]="i"></label>
+    </div>
+
+    <section class="attribute">
+      <div class="text-hp">{{enemy.attribute.hp}} / {{enemy.attribute.max_hp}}</div>
+      <div class="real-hp" [ngStyle]="{'width': lifeEnemy((enemy.attribute.hp * 100) / enemy.attribute.max_hp)}"></div>
+      <div class="max-hp"></div>
+    </section>
+  </article>
+</ng-template>
