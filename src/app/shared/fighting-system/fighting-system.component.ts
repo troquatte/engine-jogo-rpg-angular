@@ -65,7 +65,7 @@ export class FightingSystemComponent implements OnInit {
       enemy.actionFightAnimate = true;
 
       //Play Sound
-      this.soundMapService.getPlayObjectsSound('./assets/images/enemy/orcs/audio/orc.mp3')
+      this.soundMapService.getPlayObjectsSound('./assets/sounds/enemy/orcs/audio/orc.mp3')
 
       //Verify Hp enemy and kill
       if (enemy.attribute.hp <= 0) {

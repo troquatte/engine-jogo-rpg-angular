@@ -81,7 +81,7 @@ export class PositionMapPhaseOneService extends PositionMapPhasesService {
           x: 300,
           avatar: 'url(assets/images/enemy/orcs/orc-1.jpg)',
           attribute: {
-            atk: 0,
+            atk: 1,
             def: 0,
             max_hp: 10,
             hp: 10,
@@ -96,7 +96,7 @@ export class PositionMapPhaseOneService extends PositionMapPhasesService {
           x: 200,
           avatar: 'url(assets/images/enemy/orcs/orc-2.jpg)',
           attribute: {
-            atk: 0,
+            atk: 1,
             def: 0,
             max_hp: 10,
             hp: 10,
@@ -111,7 +111,7 @@ export class PositionMapPhaseOneService extends PositionMapPhasesService {
           x: 400,
           avatar: 'url(assets/images/enemy/orcs/orc-3.jpg)',
           attribute: {
-            atk: 0,
+            atk: 1,
             def: 0,
             max_hp: 10,
             hp: 10,
